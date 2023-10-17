@@ -23,23 +23,30 @@ public class LinearEquation {
         double x = Math.pow(x2 - x1, 2);
         double y = Math.pow(y2 - y1, 2);
         distance = Math.sqrt(x + y);
-        return distance;
+        return roundedToHundredth(distance);
     }
 
     public double yIntercept(){
-        yIntercept = y1 - slope() * x1;
+        yIntercept = y1 - slopeValue() * x1;
         return roundedToHundredth(yIntercept);
     }
 
-    public double slope(){
-        double rise = y2 - y1;
-        double run = x2 - x1;
-        double slope = rise / run;
+    public String slope(){
+        int rise = y2 - y1;
+        int run = x2 - x1;
+        String slope = rise + "/" + run;
         return slope;
     }
 
+    public double slopeValue(){
+        double rise1 = y2 - y1;
+        double run1 = x2 - x1;
+        double slope1 = rise1 / run1;
+        return slope1;
+    }
+
     public String equation() {
-        if (slope() > 0 || slope() < 0){
+        if (slopeValue() > 0 || slopeValue() < 0){
             if (yIntercept() > 0) {
                 return "y = " + slope() + "x + " + yIntercept();
             } else if (yIntercept() < 0) {
@@ -53,8 +60,17 @@ public class LinearEquation {
     }
 
     public String coordinateForX (double x) {
-        double a = (slope() * x) + yIntercept();
+        double a = (slopeValue() * x) + yIntercept();
         return "(" + x + ", " + a + ")";
+    }
+
+    public String lineInfo() {
+        String finalStatement = "The two points are: (" + x1 + ", " + y1 + ") and (" + x2 + ", " + y2 + ")\n";
+        finalStatement += "The equation of the line between these points is: " + equation() + "\n";
+        finalStatement += "The slope of this line is: " + slopeValue() + "\n";
+        finalStatement += "The y-intercept of this line is: " + yIntercept() + "\n";
+        finalStatement += "The distance between these points is " + distance();
+        return finalStatement;
     }
 
     private double roundedToHundredth (double toRound) {
