@@ -49,15 +49,44 @@ public class LinearEquation {
     }
 
     public String equation() {
-        if (slopeValue() == 1) {
-            return "y = x" + " + " + yIntercept();
-        } else if (slopeValue() == -1) {
-            return "y = -x";
-        } else if (slopeValue() % 1 == 0) {
-            return "y = " + (int) slopeValue() + "x " + yIntercept();
+        if (yIntercept() > 0) {
+            if (slopeValue() == 0) {
+                return "y = " + (int) yIntercept();
+            } else if (slopeValue() == 1) {
+                return "y = x" + " + " + yIntercept();
+            } else if (slopeValue() == -1) {
+                return "y = -x + " + yIntercept();
+            } else if (slopeValue() % 1 == 0) {
+                return "y = " + (int) slopeValue() + "x + " + yIntercept();
+            } else {
+                return "y = " + slope() + "x + " + yIntercept();
+            }
+        } else if (yIntercept() < 0) {
+            if (slopeValue() == 0) {
+                return "y = " + (int) yIntercept();
+            } else if (slopeValue() == 1) {
+                return "y = x" + " - " + (yIntercept() * -1);
+            } else if (slopeValue() == -1) {
+                return "y = -x" + " - " + (yIntercept() * -1);
+            } else if (slopeValue() % 1 == 0) {
+                return "y = " + (int) slopeValue() + "x - " + (yIntercept() * -1);
+            } else {
+                return "y = " + slope() + "x - " + (yIntercept() * -1);
+            }
         } else {
-            return "y = " + slope() + "x + " + yIntercept();
+            if (slopeValue() == 0) {
+                return "y = " + (int) yIntercept();
+            } else if (slopeValue() == 1) {
+                return "y = x";
+            } else if (slopeValue() == -1) {
+                return "y = -x";
+            } else if (slopeValue() % 1 == 0) {
+                return "y = " + (int) slopeValue() + "x";
+            } else {
+                return "y = " + slope() + "x";
+            }
         }
+
     }
 
     public String coordinateForX (double x) {
