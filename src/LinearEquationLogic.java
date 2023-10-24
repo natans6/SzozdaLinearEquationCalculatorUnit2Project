@@ -6,7 +6,6 @@ public class LinearEquationLogic {
     public void start() {
         introduction();
         getInfo();
-        newXValue();
         repeat();
     }
     public LinearEquationLogic() {
@@ -30,26 +29,34 @@ public class LinearEquationLogic {
         int xAsInt2 = Integer.parseInt(xValue2);
         String yValue2 = input2.substring(input2.indexOf(",") + 2, input2.length() - 1);
         int yAsInt2 = Integer.parseInt(yValue2);
-        System.out.println(xAsInt2);
+        System.out.println();
         linearEquation = new LinearEquation(xAsInt, yAsInt, xAsInt2, yAsInt2);
         System.out.println(linearEquation.lineInfo());
+        if (xAsInt != xAsInt2) {
+            newXValue();
+        } else {
+            System.out.println();
+        }
+
     }
     private void newXValue() {
-        System.out.println("");
+        System.out.println();
         System.out.print("Enter a value for x: ");
         double newX = scan.nextDouble();
         scan.nextLine();
-        System.out.println(linearEquation.coordinateForX(newX));
+        System.out.println("The point on the line is " + linearEquation.coordinateForX(newX));
+        System.out.println();
     }
 
     private void repeat() {
         System.out.print("Would you like to enter another pair of coordinates? Yes / No: ");
         String inputYOrN = scan.nextLine();
-        while (inputYOrN != "No") {
+        while (!inputYOrN.equals("No")) {
             getInfo();
             System.out.print("Would you like to enter another pair of coordinates? Yes / No: ");
             inputYOrN = scan.nextLine();
         }
-
+        System.out.println("Thank you for using the slope calculator, goodbye!");
     }
+
 }

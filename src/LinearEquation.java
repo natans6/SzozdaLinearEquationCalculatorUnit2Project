@@ -34,28 +34,29 @@ public class LinearEquation {
     public String slope(){
         int rise = y2 - y1;
         int run = x2 - x1;
-        String slope = rise + "/" + run;
-        return slope;
+        if (rise < 0 && run < 0) {
+            return (rise * -1) + "/" + (run * -1);
+        } else if (run < 0 && rise > 0){
+            return "-" + rise + "/" + (run *  -1);
+        }
+        return rise + "/" + run;
     }
 
     public double slopeValue(){
         double rise1 = y2 - y1;
         double run1 = x2 - x1;
-        double slope1 = rise1 / run1;
-        return slope1;
+        return roundedToHundredth(rise1 / run1);
     }
 
     public String equation() {
-        if (slopeValue() > 0 || slopeValue() < 0){
-            if (yIntercept() > 0) {
-                return "y = " + slope() + "x + " + yIntercept();
-            } else if (yIntercept() < 0) {
-                return "y = " + slope() + "x - " + (yIntercept * -1.0);
-            } else {
-                return "y = " + slope() + "x";
-            }
+        if (slopeValue() == 1) {
+            return "y = x" + " + " + yIntercept();
+        } else if (slopeValue() == -1) {
+            return "y = -x";
+        } else if (slopeValue() % 1 == 0) {
+            return "y = " + (int) slopeValue() + "x " + yIntercept();
         } else {
-            return "y = " + yIntercept;
+            return "y = " + slope() + "x + " + yIntercept();
         }
     }
 
@@ -64,13 +65,18 @@ public class LinearEquation {
         return "(" + x + ", " + a + ")";
     }
 
+
     public String lineInfo() {
-        String finalStatement = "The two points are: (" + x1 + ", " + y1 + ") and (" + x2 + ", " + y2 + ")\n";
-        finalStatement += "The equation of the line between these points is: " + equation() + "\n";
-        finalStatement += "The slope of this line is: " + slopeValue() + "\n";
-        finalStatement += "The y-intercept of this line is: " + yIntercept() + "\n";
-        finalStatement += "The distance between these points is " + distance();
-        return finalStatement;
+        if (x1 != x2) {
+            String finalStatement = "The two points are: (" + x1 + ", " + y1 + ") and (" + x2 + ", " + y2 + ")\n";
+            finalStatement += "The equation of the line between these points is: " + equation() + "\n";
+            finalStatement += "The slope of this line is: " + slopeValue() + "\n";
+            finalStatement += "The y-intercept of this line is: " + yIntercept() + "\n";
+            finalStatement += "The distance between these points is " + distance();
+            return finalStatement;
+        } else {
+            return "The points are on a vertical line: x = " + x1;
+        }
     }
 
     private double roundedToHundredth (double toRound) {
