@@ -91,7 +91,8 @@ public class LinearEquation {
 
     public String coordinateForX (double x) {
         double a = (slopeValue() * x) + yIntercept();
-        return "(" + x + ", " + a + ")";
+        double roundedA = roundedToHundredth(a);
+        return "(" + x + ", " + roundedA + ")";
     }
 
 
